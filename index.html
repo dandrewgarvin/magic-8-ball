@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magic 8 Ball</title>
+
+  <style>
+    body {
+      box-sizing: border-box;
+      background: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    h1 {}
+
+    p {}
+
+    #daily-question {
+      font-size: 2rem;
+      font-weight: bold;
+      max-width: 700px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Fun Question Friday</h1>
+
+  <p>Today's question is:</p>
+  <p id="daily-question"></p>
+
+  <script>
+    // import questions.json file using XHR
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'questions.json', true);
+
+    xhr.onload = function () {
+      if (this.status === 200) {
+        const questions = JSON.parse(this.responseText);
+        // console.log(questions);
+
+        // get random question from questions.json
+        const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+        console.log(randomQuestion);
+
+        document.getElementById('daily-question').innerHTML = randomQuestion;
+      }
+    }
+
+    xhr.send();
+  </script>
+</body>
+
+</html>
